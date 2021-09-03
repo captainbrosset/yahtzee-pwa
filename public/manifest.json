@@ -1,0 +1,22 @@
+{
+    "lang": "en-us",
+    "name": "Yahtzee",
+    "short_name": "Yahtzee",
+    "description": "Play Yahtzee",
+    "scope": "/",
+    "start_url": "/",
+    "background_color": "#FFFFFF",
+    "theme_color": "#FFFFFF",
+    "orientation": "any",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "/icon-128.png",
+            "sizes": "128x128"
+        },
+        {
+            "src": "/icon-256.png",
+            "sizes": "256x256"
+        }
+    ]
+}

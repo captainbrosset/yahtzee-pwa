@@ -1,0 +1,243 @@
+:root {
+  --current: rgb(30, 207, 174);
+  --player: #eaa4c2;
+  --main-padding: 20px;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: var(--main-padding);
+}
+
+.game {
+  display: grid;
+  grid-template-rows: 70px auto auto;
+  gap: var(--main-padding);
+}
+
+.throw {
+  font-size: 40px;
+  background: var(--current);
+  border: 6px solid black;
+  place-self: stretch center;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 50%;
+}
+
+.players {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.player {
+  background: white;
+}
+
+.player.selected {
+  background: white;
+  outline: 6px solid var(--current);
+}
+
+.player > .name {
+	margin: 0;
+	padding: 5px;
+	font-size: 14px;
+	border: 1px solid var(--player);
+	border-bottom: 0;
+	background: var(--player);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.player.selected > .name {
+  border-color: var(--current);
+}
+
+.categories {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: start;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--player);
+  border-width: 0 0 1px 1px;
+}
+
+.selected .categories {
+  border-color: var(--current);
+}
+
+.categories td {
+  border: 1px solid var(--player);
+  border-width: 1px 1px 0 0;
+  padding: 5px;
+}
+
+.selected .categories td {
+  border-color: var(--current);
+}
+
+
+.category.done,
+.category.bonus {
+  background: #eee;
+}
+
+.category .name {
+  width: 1%;
+  white-space: nowrap;
+}
+
+.category .actions button {
+  background: var(--current);
+  border: 0;
+  display: inline;
+  margin: 0;
+  border-radius: 5px;
+}
+
+.category.can-do .name {
+  background: var(--current);
+}
+
+.category .score {
+  text-align: center;
+  border-right: 0;
+}
+
+.category.can-do .score,
+.category:not(.total) .cancel:not(:empty) {
+  font-style: italic;
+  color: #a0a0a0;
+  cursor: pointer;
+  text-align: center;
+}
+
+.category.can-do .score:hover,
+.category:not(.total) .cancel:not(:empty):hover {
+  color: black;
+  background: var(--current);
+}
+
+.category .cancel span {
+  display: block;
+  width: 100%;
+}
+
+.category.total {
+  background: var(--player);
+  font-weight: bold;
+}
+
+.hand,
+.die {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.hand {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--main-padding);
+}
+.die {
+  margin: 5px;
+  flex-shrink: 0;
+  background: #edecea;
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+  outline: 6px solid #ccc;
+
+  --dot-image: radial-gradient(#5a5454, black 6px, transparent 0);
+}
+.die.selected {
+  outline: 6px solid var(--current);
+}
+.die.one {
+  background-image: var(--dot-image);
+}
+.die.two {
+  background-image: var(--dot-image), var(--dot-image);
+  background-position: -15px 0px, 15px 0px;
+}
+.die.three {
+  background-image: var(--dot-image), var(--dot-image), var(--dot-image);
+  background-position: -15px -15px, 15px 15px, center;
+}
+.die.four {
+  background-image: var(--dot-image), var(--dot-image), var(--dot-image),
+    var(--dot-image);
+  background-position: -15px -15px, 15px -15px, -15px 15px, 15px 15px;
+}
+.die.five {
+  background-image: var(--dot-image), var(--dot-image), var(--dot-image),
+    var(--dot-image), var(--dot-image);
+  background-position: -15px -15px, 15px -15px, -15px 15px, 15px 15px, center;
+}
+.die.six {
+  background-image: var(--dot-image), var(--dot-image), var(--dot-image),
+    var(--dot-image), var(--dot-image), var(--dot-image);
+  background-position: -15px 0, 15px 0, -15px -15px, 15px -15px, -15px 15px,
+    15px 15px;
+}
+
+.start-screen,
+.end-screen {
+  background: #fff;
+  padding: 20px;
+  position: absolute;
+  border: 4px solid black;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: bold;
+  box-sizing: border-box;
+  box-shadow: 0 0 22px #0009;
+}
+
+.end-screen {
+  width: 400px;
+  left: calc(50% - 200px);
+  top: 350px;
+}
+
+.start-screen {
+  width: calc(100vw - 40px);
+  height: calc(100vh - 40px);
+  left: 20px;
+  top: 20px;
+  display: grid;
+  place-content: center stretch;
+}
+
+.start-screen input {
+  margin: 20px;
+  padding: 10px;
+  border: 4px solid black;
+  font-size: 14px;
+  width: 75%;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.end-screen ul,
+.end-screen li {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.end-screen li:not(:last-child)::after {
+  content: " et ";
+}

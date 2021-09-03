@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<meta charset="utf8" />
+<link rel="stylesheet" href="ui.css" />
+
+<div class="start-screen">
+  <label
+    >Player names<br />
+    <input type="text"
+  /></label>
+</div>
+
+<div id="app">
+  <div class="end-screen" v-if="game && game.isDone">
+    <div v-if="game.leaders.length === 1">
+      {{ game.leaders[0].name }} won!!
+    </div>
+    <div v-if="game.leaders.length > 1">
+      <ul>
+        <li v-for="player in game.leaders">{{ player.name }}</li>
+      </ul>
+      won!!
+    </div>
+  </div>
+  <div class="game" v-if="game">
+    <button
+      class="throw"
+      v-on:click="selectDice"
+      :disabled="!game.hasStarted || !game.currentPlayer || !actions.selectDice || !game.currentPlayer.canThrow"
+    >
+      roll
+    </button>
+    <ul class="hand">
+      <li
+        v-for="value in game.currentHand"
+        v-on:click="onDieClick"
+        :class="['die', value.name]"
+      ></li>
+    </ul>
+    <ul class="players">
+      <li
+        v-for="player in game.players"
+        :class="['player', !game.isDone && player.isCurrent ? 'selected' : '']"
+      >
+        <h2 class="name">{{ player.name }}</h2>
+        <table class="categories">
+          <tr
+            v-for="(category, index) in player.categories"
+            :class="['category', category.isAlreadyDone ? 'done' : 'todo', category.isAlreadyDone && category.score === 0 ? 'cancelled' : '', category.isSelectable && player.isCurrent ? 'can-do' : '']"
+          >
+            <td class="name">{{ translate(category.name) }}</td>
+            <td v-if="category.isAlreadyDone && category.score > 0" class="score">
+              {{ category.score }}
+            </td>
+            <td v-if="category.isAlreadyDone && category.score === 0" class="score" title="Cancelled">
+              X
+            </td>
+            <td
+              class="score"
+              v-if="player.isCurrent && category.isSelectable"
+              v-on:click="onCategorySelectClick(index)"
+              title="Select this category to score points"
+            >
+              {{ category.scoreIfSelected }}
+            </td>
+            <td
+              v-if="!category.isAlreadyDone && (!category.isSelectable || !player.isCurrent)"
+              class="score"
+            ></td>
+            <td class="cancel">
+              <span
+                v-if="player.isCurrent && !category.isAlreadyDone && player.remainingThrows < 3"
+                v-on:click="onCategoryCancelClick(index)"
+                title="Cancel this category"
+                >X</span
+              >
+            </td>
+          </tr>
+          <tr class="category bonus" v-if="player.hasBonus">
+            <td class="name">Bonus</td>
+            <td class="score">{{ player.bonusAmount }}</td>
+            <td class="cancel"></td>
+          </tr>
+          <tr class="category total">
+            <td class="name">Total</td>
+            <td class="score">{{ player.score }}</td>
+            <td class="cancel"></td>
+          </tr>
+        </table>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="bundle.js"></script>

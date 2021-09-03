@@ -146,16 +146,15 @@ body {
 }
 .hand {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   gap: var(--main-padding);
 }
 .die {
-  margin: 5px;
-  flex-shrink: 0;
   background: #edecea;
-  width: 100px;
-  height: 100px;
+  flex-basis: calc((100vw - 200px) / 5);
+  flex-shrink: 0;
+  max-width: 80px;
+  aspect-ratio: 1 / 1;
   border-radius: 4px;
   outline: 6px solid #ccc;
 

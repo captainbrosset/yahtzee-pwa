@@ -6,7 +6,7 @@ const CATEGORY_NAMES = {
   Threes: "Threes",
   Fours: "Fours",
   Fives: "Fives",
-  Sixes: "Sizes",
+  Sixes: "Sixes",
   ThreeOfAKind: "3 of a kind",
   FourOfAKind: "4 of a kind",
   FullHouse: "Full house",

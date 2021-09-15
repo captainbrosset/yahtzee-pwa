@@ -146,6 +146,7 @@ body {
 }
 .hand {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: var(--main-padding);
 }
@@ -154,8 +155,8 @@ body {
   flex-basis: calc((100vw - 200px) / 5);
   flex-shrink: 0;
   max-width: 80px;
+  min-width: 45px;
   aspect-ratio: 1 / 1;
-  border-radius: 4px;
   outline: 6px solid #ccc;
 
   --dot-image: radial-gradient(#5a5454, black 6px, transparent 0);

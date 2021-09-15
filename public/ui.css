@@ -7,7 +7,18 @@
 body {
   font-family: sans-serif;
   margin: 0;
-  padding: var(--main-padding);
+  padding: calc(env(titlebar-area-height, 0px) + var(--main-padding)) var(--main-padding) var(--main-padding) var(--main-padding);
+  background: radial-gradient(150vh, transparent, #1ecfae);
+}
+
+.drag {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: env(titlebar-area-height, 0);
+  z-index: 1;
+  -webkit-app-region: drag;
 }
 
 .game {
@@ -198,7 +209,6 @@ body {
   padding: 20px;
   position: absolute;
   border: 4px solid black;
-  border-radius: 10px;
   text-align: center;
   font-weight: bold;
   box-sizing: border-box;
@@ -212,21 +222,21 @@ body {
 }
 
 .start-screen {
-  width: calc(100vw - 40px);
-  height: calc(100vh - 40px);
-  left: 20px;
-  top: 20px;
+  width: 50vw;
+  height: 50vh;
+  min-width: 200px;
+  min-height: 200px;
+  margin: 25vh 0 0 calc(25vw - var(--main-padding));
   display: grid;
   place-content: center stretch;
 }
 
 .start-screen input {
-  margin: 20px;
+  margin: 20px 0;
   padding: 10px;
   border: 4px solid black;
   font-size: 14px;
   width: 75%;
-  border-radius: 5px;
   text-align: center;
 }
 
